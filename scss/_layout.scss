@@ -1,0 +1,320 @@
+// layout is general layout not individual element layout, so thats include the element containing the CONTENT
+
+.navbar {
+  //THE z-index: ; property does not work if we dont define the position: ; for elements
+  position: relative;
+  z-index: 200;
+  &-navigation {
+    display: flex;
+
+    &-left {
+      inline-size: 50vw;
+      block-size: 100vh;
+      background-color: $color-dark;
+      // position: fixed; means relative to the viewport
+      position: fixed;
+      left: -50vw;
+      transition: left 0.8s cubic-bezier(1, 0, 0, 1);
+
+      @media (max-width: 800px) {
+        display: none;
+      }
+
+      .left-img {
+        inline-size: 50%;
+        position: absolute;
+        box-shadow: 0 15px 60px rgba($color-black, 0.4);
+        opacity: 0.7;
+        block-size: 200px;
+        border-radius: 10px;
+        object-fit: cover;
+
+        @media (max-width: 1300px) {
+          inline-size: 55%;
+        }
+
+        @media (max-width: 1000px) {
+          inline-size: 65%;
+        }
+      }
+      .left-img-1 {
+        inset-block-start: 1%;
+        left: 15%;
+        @media (max-width: 1000px) {
+          left: 5%;
+        }
+      }
+      .left-img-2 {
+        inset-block-start: 30%;
+        inset-inline-start: 25%;
+        @media (max-width: 1000px) {
+          left: 15%;
+        }
+      }
+      .left-img-3 {
+        inset-block-start: 60%;
+        inset-inline-start: 35%;
+        @media (max-width: 1000px) {
+          left: 25%;
+        }
+      }
+    }
+    &-right {
+      inline-size: 50vw;
+      block-size: 100vh;
+      // position: fixed; means relative to the viewport
+      background-color: #1f1d1d;
+      position: fixed;
+      right: -50vw;
+      transition: right 0.8s cubic-bezier(1, 0, 0, 1);
+      @include flexLayout;
+
+      @media (max-width: 600px) {
+        right: -70vw;
+      }
+
+      @media (max-width: 800px) {
+        inline-size: 100vw;
+        right: -100vw;
+      }
+    }
+    .nav-list {
+      &-item {
+        list-style: none;
+      }
+      &-link {
+        font-family: $font-dancingScript;
+        font-size: 50px;
+        // by default we have uppercase so we can change it to capitalize
+        @include textStyles(capitalize);
+        color: $color-secondary;
+        text-decoration: none;
+        display: block;
+        margin: 20px;
+        text-align: center;
+        transition: all 0.5s;
+        &:hover {
+          color: $color-primary;
+          letter-spacing: 4px;
+        }
+
+        @media (max-width: 600px) {
+          font-size: 40px;
+        }
+      }
+    }
+  }
+}
+
+// using checkbox to achieve this hide and un-hide as the label and input element has same id= name as label for=name
+.checkbox:checked ~ .navbar-navigation .navbar-navigation-left {
+  left: 0;
+}
+// using checkbox to achieve this hide and un-hide as the label and input element has same id= name as label for=name
+.checkbox:checked ~ .navbar-navigation .navbar-navigation-right {
+  right: 0;
+}
+
+.checkbox:checked ~ .hamburger-menu .menu {
+  transform: rotateZ(90deg);
+}
+.checkbox:checked ~ .hamburger-menu .menu-line-1 {
+  transform: rotateZ(-40deg);
+}
+.checkbox:checked ~ .hamburger-menu .menu-line-2 {
+  opacity: 0;
+}
+.checkbox:checked ~ .hamburger-menu .menu-line-3 {
+  transform: rotateZ(40deg);
+}
+
+.header {
+  width: 100%;
+  height: 100vh;
+  // we dont have to define the path according to  scss files but as compiled code is placed in main.css, therefore we have to define path of that image according to the css file
+  background: linear-gradient(rgba($color-black, 0.8), rgba($color-black, 0.6)),
+    url(../images/gallery-4.jpg) center no-repeat;
+  background-size: cover;
+  position: relative;
+
+  //.brand is the child element of header so we have to use nesting
+  .brand {
+    // relatively to .header
+    @include centering(15%);
+
+    // setting to flex to put logo and names side by side
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 500px) {
+      @include centering(12%);
+    }
+  }
+  //in order to select .header-banner we dont need to use the whole class name we
+  //  can use & symbol which  INDICATE part of PARENT ELEMENT NOT DESCENDANT
+  &-banner {
+    @include centering(50%);
+    text-align: center;
+  }
+}
+
+.about-us {
+  block-size: 90vh;
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 900px) {
+    block-size: 70vh;
+  }
+
+  &-left {
+    inline-size: 40%;
+    position: relative;
+    inset-inline-start: -10px;
+
+    @media (max-width: 1300px) {
+      inset-inline-start: 80px;
+    }
+    @media (max-width: 800px) {
+      display: none;
+    }
+
+    img {
+      inline-size: 100%;
+      opacity: 0.7s;
+    }
+  }
+
+  &-right {
+    inline-size: 60%a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 0;
+    padding-inline: 100px;
+    box-sizing: border-box;
+
+    @media (max-width: 1300px) {
+      padding-block: 0;
+      padding-inline: 50px;
+    }
+
+    @media (max-width: 800px) {
+      inline-size: 100%;
+    }
+
+    .stars {
+      margin-block: 30px;
+      margin-inline: 0;
+
+      @media (max-width: 1000px) {
+        margin-block: 15px;
+        margin-inline: 0;
+      }
+    }
+    .star {
+      font-size: 15px;
+      color: $color-primary;
+      margin-inline-start: 10px;
+      font-size: 30px;
+
+      @media (max-width: 1000px) {
+        font-size: 12px;
+      }
+    }
+    .description {
+      font-family: $font-josefinSans;
+      font-size: 25px;
+      font-style: italic;
+      color: $color-secondary;
+      text-align: justify;
+
+      &::first-letter {
+        padding-inline-start: 50px;
+      }
+      @media (max-width: 1600px) {
+        font-size: 18px;
+      }
+      @media (max-width: 1000px) {
+        font-size: 14px;
+      }
+      @media (max-width: 500px) {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.gallery {
+  .cards-wrapper {
+    display: flex;
+    // to show hidden rows set flex-wrap to wrap
+    flex-wrap: wrap;
+  }
+}
+
+.footer {
+  padding-block: 70px;
+  padding-inline: 0;
+  @include flexLayout;
+  flex-direction: column;
+
+  @media (max-width: 500px) {
+    padding-block: 40px;
+    padding-inline: 0;
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    margin-block-end: 70px;
+  }
+
+  .social-media {
+    display: flex;
+    inline-size: 300px;
+    justify-content: space-between;
+    margin-block-end: 70px;
+
+    @media (max-width: 500px) {
+      inline-size: 200px;
+      margin-block-end: 40px;
+    }
+
+    &-item {
+      list-style: none;
+    }
+    &-link {
+      text-decoration: none;
+      font-size: 50px;
+      color: $color-secondary;
+      transition: color 0.7s;
+
+      &:hover {
+        color: $color-primary;
+      }
+      @media (max-width: 1000px) {
+        font-size: 35px;
+      }
+      @media (max-width: 500px) {
+        font-size: 25px;
+      }
+    }
+  }
+  &-copyright-paragraph {
+    font-family: $font-josefinSans;
+    font-size: 18px;
+    color: $color-secondary;
+    // by default it makes text uppercase, but we need to be in capitalize, so will will pass capitalize
+    @include textStyles(capitalize);
+
+    @media (max-width: 800px) {
+      inline-size: 70%;
+      margin: auto;
+      text-align: center;
+    }
+    @media (max-width: 500px) {
+      font-size: 14px;
+    }
+  }
+}

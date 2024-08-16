@@ -1,0 +1,264 @@
+//  we put the items like logos,buttons (elements class names) that will reused again and again
+.hamburger-menu {
+  inline-size: 40px;
+  block-size: 40px;
+  position: fixed;
+  inset-block-start: 10%;
+  inset-inline-end: 5%;
+  z-index: 300;
+
+  @media (max-width: 800px) {
+    inline-size: 35px;
+    block-size: 35px;
+  }
+
+  @media (max-width: 500px) {
+    inline-size: 25px;
+    block-size: 25px;
+  }
+
+  .menu {
+    @extend %fullSpace;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    cursor: pointer;
+    transition: transform 0.5s;
+
+    &-line {
+      inline-size: 100%;
+      block-size: 4px;
+      background-color: $color-primary;
+      // transform-origin is like saying the pivot in 3ds max
+      transform-origin: right;
+      transition: all 0.5s 0.5s;
+
+      @media (max-width: 800px) {
+        block-size: 3px;
+      }
+      @media (max-width: 500px) {
+        block-size: 2px;
+      }
+    }
+  }
+}
+
+.logo {
+  font-size: 70px;
+  color: $color-primary;
+  // remember a link element is a  inline element so we to change to block or flex for border-box to be applied in all directions
+  // reusing that flexbox  properties we set in flexLayout
+  @include flexLayout;
+  inline-size: 110px;
+  block-size: 110px;
+  border: 3px solid $color-primary;
+  border-radius: 50%;
+  margin-inline-end: 20px;
+  text-decoration: none;
+
+  @media (max-width: 1000px) {
+    font-size: 50px;
+    inline-size: 90px;
+    block-size: 90px;
+  }
+  @media (max-width: 500px) {
+    block-size: 50px;
+    inline-size: 50px;
+    font-size: 30px;
+    border-width: 2px;
+  }
+}
+
+.main-name {
+  font-family: $font-nunito;
+  font-size: 50px;
+  color: $color-secondary;
+  @include textStyles;
+
+  @media (max-width: 1000px) {
+    font-size: 40px;
+  }
+  @media (max-width: 500px) {
+    font-size: 20px;
+    text-align: center;
+  }
+}
+
+.sub-name {
+  font-family: $font-josefinSans;
+  font-size: 18px;
+  color: $color-secondary;
+  text-align: center;
+  @include textStyles;
+
+  @media (max-width: 500px) {
+    font-size: 12px;
+    text-align: center;
+  }
+}
+
+.main-heading {
+  font-family: $font-dancingScript;
+  font-size: 100px;
+  font-weight: 300;
+  color: $color-primary;
+  margin-block-end: 40px;
+
+  @media (max-width: 1600px) {
+    font-size: 80px;
+  }
+  @media (max-width: 1000px) {
+    font-size: 60px;
+  }
+  @media (max-width: 500px) {
+    font-size: 40px;
+    margin-block-end: 20px;
+  }
+}
+
+.sub-heading {
+  font-family: $font-josefinSans;
+  font-size: 60px;
+  font-weight: 300;
+  color: $color-secondary;
+  margin-block-end: 80px;
+  text-align: center;
+
+  @media (max-width: 1600px) {
+    font-size: 50px;
+    margin-block-end: 50px;
+  }
+  @media (max-width: 1300px) {
+    font-size: 40px;
+    margin-block-end: 30px;
+  }
+  @media (max-width: 1000px) {
+    font-size: 30px;
+  }
+  @media (max-width: 500px) {
+    font-size: 20px;
+    margin-block-end: 10px;
+  }
+}
+
+.main-btn {
+  inline-size: 170px;
+  block-size: 45px;
+  font-family: $font-josefinSans;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: $color-primary;
+  background-color: transparent;
+  border: 1px solid $color-primary;
+  // always remove outlines on buttons
+  outline: none;
+  cursor: pointer;
+  transition: all 0.4s;
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-dark;
+  }
+
+  @media (max-width: 800px) {
+    inline-size: 150px;
+    block-size: 35px;
+    font-size: 12px;
+  }
+  @media (max-width: 500px) {
+    inline-size: 130px;
+    block-size: 30px;
+    font-size: 10px;
+  }
+}
+
+.card {
+  inline-size: 33.3333%;
+  block-size: 30vw;
+  position: relative;
+  overflow: hidden;
+
+  &:hover .card-overlay {
+    left: 0;
+  }
+
+  &-overlay {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    background-color: rgba($color-primary, 0.6);
+    color: $color-white;
+    z-index: 10;
+    @include flexLayout;
+    flex-direction: column;
+    @extend %fullSpace;
+    transition: left 0.7s;
+
+    &-heading {
+      font-family: $font-nunito;
+      font-size: 50px;
+      @include textStyles(capitalize);
+
+      @media (max-width: 900px) {
+        font-size: 35px;
+      }
+
+      @media (max-width: 650px) {
+        font-size: 25px;
+      }
+      @media (max-width: 500px) {
+        display: none;
+      }
+    }
+    &-paragraph {
+      font-family: $font-josefinSans;
+      font-size: 30px;
+      margin-block-end: 30px;
+      @include textStyles(capitalize);
+
+      @media (max-width: 900px) {
+        font-size: 20px;
+      }
+
+      @media (max-width: 650px) {
+        font-size: 15px;
+      }
+      @media (max-width: 500px) {
+        display: none;
+      }
+    }
+    &-btn {
+      inline-size: 150px;
+      block-size: 40px;
+      color: $color-primary;
+      background-color: $color-white;
+      font-family: $font-josefinSans;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: 1px solid $color-primary;
+      border-radius: 30px;
+      outline: none;
+      cursor: pointer;
+
+      @media (max-width: 900px) {
+        font-size: 12px;
+        inline-size: 130px;
+        block-size: 30px;
+      }
+      @media (max-width: 650px) {
+        font-size: 10px;
+        inline-size: 100px;
+        block-size: 30px;
+      }
+    }
+  }
+
+  &-img {
+    @extend %fullSpace;
+    object-fit: cover;
+    opacity: 0.5;
+  }
+}
